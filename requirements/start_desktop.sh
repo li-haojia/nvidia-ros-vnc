@@ -20,7 +20,7 @@ else
     TEST_HAS_RUN=1
     pkill Xvfb*
 fi
-
+done
 echo "export DISPLAY=:${DISPLAY_NUM}" >> /root/.bashrc
 
 # Start XVnc/X/Lubuntu
@@ -36,7 +36,7 @@ chmod 0600 $HOME/.vnc/passwd
 chown `stat --printf=%u:%g $HOME` -R $HOME/.vnc
 
 # Without password
-/opt/TurboVNC/bin/vncserver -geometry 1920x1080 -geometry 1024x768 -depth 24 -dpi 96 -nolisten tcp -bs -ac -rfbport $PAI_CONTAINER_HOST_vnc_PORT_LIST
+vglrun /opt/TurboVNC/bin/vncserver -geometry 1920x1080 -geometry 1024x768 -depth 24 -dpi 96 -nolisten tcp -bs -ac -rfbport $PAI_CONTAINER_HOST_vnc_PORT_LIST
 
 /opt/noVNC/utils/launch.sh --listen $PAI_CONTAINER_HOST_vnc_http_PORT_LIST --vnc localhost:$PAI_CONTAINER_HOST_vnc_PORT_LIST  >> vnc.log &
 
