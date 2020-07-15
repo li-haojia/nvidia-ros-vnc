@@ -1,9 +1,9 @@
-FROM nvidia/cudagl:10.0-devel-ubuntu18.04
+FROM nvidia/cudagl:10.0-devel-ubuntu16.04
 #---------------------------------------------------------------------
 # Install CUDNN
 #---------------------------------------------------------------------
 
-RUN echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
+RUN echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 
 LABEL com.nvidia.cudnn.version="7.4.1.5"
 
@@ -31,7 +31,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     x11-xkb-utils xauth xfonts-base xkb-data \
     mesa-utils xvfb libgl1-mesa-dri libgl1-mesa-glx libglib2.0-0 libxext6 libsm6 libxrender1 \
     libglu1 libglu1:i386 libxv1 libxv1:i386 \
-    python python-numpy libpython-dev libsuitesparse-dev libgtest-dev \
+    openssh-server git python python-numpy libpython-dev libsuitesparse-dev libgtest-dev \
     libeigen3-dev libsdl1.2-dev libignition-math2-dev libarmadillo-dev libarmadillo${LIBARMADILLO_VERSION} libsdl-image1.2-dev libsdl-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -96,22 +96,22 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    ros-melodic-desktop-full \
-    ros-melodic-tf2-sensor-msgs \
-    ros-melodic-geographic-msgs \
-    ros-melodic-move-base-msgs \
-    ros-melodic-ackermann-msgs \
-    ros-melodic-unique-id \
-    ros-melodic-fake-localization \
-    ros-melodic-joy \
-    ros-melodic-imu-tools \
-    ros-melodic-robot-pose-ekf \
-    ros-melodic-grpc \
-    ros-melodic-pcl-ros \
-    ros-melodic-pcl-conversions \
-    ros-melodic-controller-manager \
-    ros-melodic-joint-state-controller \
-    ros-melodic-effort-controllers \
+    ros-kinetic-desktop-full \
+    ros-kinetic-tf2-sensor-msgs \
+    ros-kinetic-geographic-msgs \
+    ros-kinetic-move-base-msgs \
+    ros-kinetic-ackermann-msgs \
+    ros-kinetic-unique-id \
+    ros-kinetic-fake-localization \
+    ros-kinetic-joy \
+    ros-kinetic-imu-tools \
+    ros-kinetic-robot-pose-ekf \
+    ros-kinetic-grpc \
+    ros-kinetic-pcl-ros \
+    ros-kinetic-pcl-conversions \
+    ros-kinetic-controller-manager \
+    ros-kinetic-joint-state-controller \
+    ros-kinetic-effort-controllers \
     && apt-get clean
 
 # catkin build tools
@@ -125,7 +125,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y locales
 RUN locale-gen "en_US.UTF-8"
 
 # Finish
-RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
 
 
 #---------------------------------------------------------------------
@@ -137,9 +137,9 @@ ARG LIBSDFORMAT_VERSION=5
 RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list \
  && wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
  && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    ros-melodic-gazebo8-plugins \
-    ros-melodic-gazebo8-ros-pkgs \
-    ros-melodic-gazebo8-ros-control \
+    ros-kinetic-gazebo8-plugins \
+    ros-kinetic-gazebo8-ros-pkgs \
+    ros-kinetic-gazebo8-ros-control \
     libpcap0.8-dev \
     gazebo8-plugin-base \
     gazebo8-common \
