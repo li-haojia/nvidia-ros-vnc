@@ -172,11 +172,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip
-RUN pip3 install setuptools==39.1.0
+# RUN pip3 install setuptools==39.1.0
 
 ## Install  Modules
-COPY requirements/requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# COPY requirements/requirements.txt requirements.txt
+# RUN pip3 install -r requirements.txt
 
 
 
